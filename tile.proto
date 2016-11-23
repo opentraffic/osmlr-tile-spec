@@ -1,5 +1,7 @@
 package opentraffic.osmlr;
 
+import "segment.proto";
+
 // traffic tile consists of a list of entries, where each entry is either a
 // Segment or a marker indicating that the traffic segment is no longer in use.
 // the ID of a particular traffic segment within the tile is its offset in the
