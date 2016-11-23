@@ -4,47 +4,47 @@ message Segment {
 
   // road classes are based on OpenStreetMap usage of the "highway" tag.
   // each value of the enumeration corresponds to one value of the tag,
-  // except for ServiceOther, which is used for service and other roads.
+  // except for ClassServiceOther, which is used for service and other roads.
   enum RoadClass {
-    Motorway = 0;
-    Trunk = 1;
-    Primary = 2;
-    Secondary = 3;
-    Tertiary = 4;
-    Unclassified = 5;
-    Residential = 6;
-    ServiceOther = 7;
+    ClassMotorway = 0;
+    ClassTrunk = 1;
+    ClassPrimary = 2;
+    ClassSecondary = 3;
+    ClassTertiary = 4;
+    ClassUnclassified = 5;
+    ClassResidential = 6;
+    ClassServiceOther = 7;
   }
 
   // form of way describes the physical attributes of the road.
   enum FormOfWay {
-    // use Undefined if you do not know what physical attributes the road
+    // use FowUndefined if you do not know what physical attributes the road
     // has.
-    Undefined = 0;
+    FowUndefined = 0;
 
-    // use Motorway for motorways.
-    Motorway = 1;
+    // use FowMotorway for motorways.
+    FowMotorway = 1;
 
-    // use MultipleCarriageway for multiple carriageway roads. that is, when
+    // use FowMultipleCarriageway for multiple carriageway roads. that is, when
     // there are separate OSM ways for each direction of travel.
-    MultipleCarriageway = 2;
+    FowMultipleCarriageway = 2;
 
-    // use SingleCarriageway for other roads.
-    SingleCarriageway = 3;
+    // use FowSingleCarriageway for other roads.
+    FowSingleCarriageway = 3;
 
-    // use Roundabout for roundabouts
-    Roundabout = 4;
+    // use FowRoundabout for roundabouts
+    FowRoundabout = 4;
 
-    // use TrafficSquare for roads which enclose an area, but which are not
+    // use FowTrafficSquare for roads which enclose an area, but which are not
     // roundabouts
-    TrafficSquare = 5;
+    FowTrafficSquare = 5;
 
-    // use SlipRoad for slip roads, ramps and other links.
-    SlipRoad = 6;
+    // use FowSlipRoad for slip roads, ramps and other links.
+    FowSlipRoad = 6;
 
-    // use Other for roads which do not match any of the above definitions,
+    // use FowOther for roads which do not match any of the above definitions,
     // but for which the form of way is known.
-    Other = 7;
+    FowOther = 7;
   }
 
   message LatLng {

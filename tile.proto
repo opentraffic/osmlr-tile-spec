@@ -21,7 +21,7 @@ package opentraffic.osmlr;
 message Tile {
 
   enum Marker {
-    Deleted = 1;
+    MarkDeleted = 1;
   }
 
   message Entry {
