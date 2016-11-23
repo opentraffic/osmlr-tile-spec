@@ -1,0 +1,38 @@
+package opentraffic.osmlr;
+
+syntax = "proto3";
+
+// traffic tile consists of a list of entries, where each entry is either a
+// Segment or a marker indicating that the traffic segment is no longer in use.
+// the ID of a particular traffic segment within the tile is its offset in the
+// list.
+//
+// the reason for including markers for deleted segments (sometimes called
+// "tombstones" in the literature) is so that tiles can have continuity across
+// data updates. traffic segments which have been updated in a way which is
+// compatible across previous versions (i.e: map-matching returns the same road
+// segments to some tolerance) will retain their IDs. anything which has changed
+// too much will have the old ID marked deleted and a new ID assigned.
+//
+// assigning IDs therefore potentially requires looking at all previous graphs,
+// and a single "master" process to assign new IDs without conflicts. since we
+// anticipate data updates to be rare events (monthly, quarterly, etc...) then
+// this should not be a problem. in return, we get (mostly) compact IDs which
+// are (mostly) tolerant to data updates.
+//
+message Tile {
+
+  enum Marker {
+    Deleted = 1;
+  }
+
+  message Entry {
+    // an entry in the tile should be _either_ a Segment _or_ a Marker. a tile
+    // containing an Entry with both or neither is invalid.
+    Segment segment = 1;
+    Marker marker = 2;
+  }
+
+  // a tile consists of a list of Entries.
+  repeated Entry entries = 1;
+}

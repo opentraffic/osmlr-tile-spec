@@ -1,0 +1,99 @@
+package opentraffic.osmlr;
+
+syntax = "proto3";
+
+message Segment {
+
+  // road classes are based on OpenStreetMap usage of the "highway" tag.
+  // each value of the enumeration corresponds to one value of the tag,
+  // except for ServiceOther, which is used for service and other roads.
+  enum RoadClass {
+    Motorway = 0;
+    Trunk = 1;
+    Primary = 2;
+    Secondary = 3;
+    Tertiary = 4;
+    Unclassified = 5;
+    Residential = 6;
+    ServiceOther = 7;
+  }
+
+  // form of way describes the physical attributes of the road.
+  enum FormOfWay {
+    // use Undefined if you do not know what physical attributes the road
+    // has.
+    Undefined = 0;
+
+    // use Motorway for motorways.
+    Motorway = 1;
+
+    // use MultipleCarriageway for multiple carriageway roads. that is, when
+    // there are separate OSM ways for each direction of travel.
+    MultipleCarriageway = 2;
+
+    // use SingleCarriageway for other roads.
+    SingleCarriageway = 3;
+
+    // use Roundabout for roundabouts
+    Roundabout = 4;
+
+    // use TrafficSquare for roads which enclose an area, but which are not
+    // roundabouts
+    TrafficSquare = 5;
+
+    // use SlipRoad for slip roads, ramps and other links.
+    SlipRoad = 6;
+
+    // use Other for roads which do not match any of the above definitions,
+    // but for which the form of way is known.
+    Other = 7;
+  }
+
+  message LatLng {
+    // lat & lng in EPSG:4326 multiplied by 10^7 and rounded to the nearest
+    // integer. this gives a precision of about 1.1cm (7/16ths of an inch)
+    // worst case at the equator.
+    sfixed32 lat = 1;
+    sfixed32 lng = 2;
+  }
+
+  message LocationReference {
+    // the starting coordinate.
+    LatLng coord = 1;
+
+    // bearing in degrees clockwise from true north between 0 and 359 - will
+    // generally fit in a couple of bytes varint.
+    //
+    // the bearing should be calculated toward a point 20m along the road from
+    // the starting coordinate.
+    uint32 bear = 2;
+
+    // road class at the starting coordinate.
+    RoadClass start_frc = 3;
+
+    // form of way at the starting coordinate.
+    FormOfWay start_fow = 4;
+
+    // lowest road class (most important road) between the start coordinate
+    // and the next LocationReference.
+    RoadClass least_frc = 5;
+
+    // length in meters, rounded to the nearest meter. the maximum allowed
+    // length is 15km, but most segments will be much shorter, so a varint
+    // representation makes sense.
+    //
+    // if the length between successive LocationReferences is more than 15km
+    // then you MUST insert an intermediate LocationReference.
+    uint32 length = 6;
+  }
+
+  // a segment is a list of at least two LocationReferences.
+  //
+  // all but the last LocationReference must contain a full set of data for
+  // each field, but the final one should consist of only a starting coordinate.
+  // any other information on the final LocationReference may be ignored.
+  //
+  // a segment with only a single LocationReference is invalid and may be
+  // ignored.
+  repeated LocationReference lrps = 1;
+}
