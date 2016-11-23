@@ -1,7 +1,5 @@
 package opentraffic.osmlr;
 
-syntax = "proto3";
-
 message Segment {
 
   // road classes are based on OpenStreetMap usage of the "highway" tag.
@@ -53,8 +51,8 @@ message Segment {
     // lat & lng in EPSG:4326 multiplied by 10^7 and rounded to the nearest
     // integer. this gives a precision of about 1.1cm (7/16ths of an inch)
     // worst case at the equator.
-    sfixed32 lat = 1;
-    sfixed32 lng = 2;
+    optional sfixed32 lat = 1;
+    optional sfixed32 lng = 2;
   }
 
   // a segment consists of multiple LocationReferences, each of which describes
@@ -79,7 +77,7 @@ message Segment {
   //
   message LocationReference {
     // the reference coordinate.
-    LatLng coord = 1;
+    optional LatLng coord = 1;
 
     // bearing in degrees clockwise from true north between 0 and 359 - will
     // generally fit in a couple of bytes varint.
@@ -91,17 +89,17 @@ message Segment {
     // each LocationReference, of which there may be several in this Segment,
     // except for the last must have a bearing calculated from the reference
     // coordinate of this LocationReference.
-    uint32 bear = 2;
+    optional uint32 bear = 2;
 
     // road class at the reference coordinate.
-    RoadClass start_frc = 3;
+    optional RoadClass start_frc = 3;
 
     // form of way at the reference coordinate.
-    FormOfWay start_fow = 4;
+    optional FormOfWay start_fow = 4;
 
     // lowest road class (most important road) between the start coordinate
     // and the next LocationReference.
-    RoadClass least_frc = 5;
+    optional RoadClass least_frc = 5;
 
     // length in meters, rounded to the nearest meter. the maximum allowed
     // length is 15km, but most segments will be much shorter, so a varint
@@ -109,7 +107,7 @@ message Segment {
     //
     // if the length between successive LocationReferences is more than 15km
     // then you MUST insert an intermediate LocationReference.
-    uint32 length = 6;
+    optional uint32 length = 6;
   }
 
   // a segment is a list of at least two LocationReferences.

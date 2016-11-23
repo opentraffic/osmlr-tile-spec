@@ -1,7 +1,5 @@
 package opentraffic.osmlr;
 
-syntax = "proto3";
-
 // traffic tile consists of a list of entries, where each entry is either a
 // Segment or a marker indicating that the traffic segment is no longer in use.
 // the ID of a particular traffic segment within the tile is its offset in the
@@ -29,8 +27,8 @@ message Tile {
   message Entry {
     // an entry in the tile should be _either_ a Segment _or_ a Marker. a tile
     // containing an Entry with both or neither is invalid.
-    Segment segment = 1;
-    Marker marker = 2;
+    optional Segment segment = 1;
+    optional Marker marker = 2;
   }
 
   // a tile consists of a list of Entries.
