@@ -6,12 +6,9 @@ OSMLR is a specification for identifying parts of a road network based on [OpenL
 Documentation
 -------------
 
-TODO.
+The specification is written in [Google Protocol Buffers](https://developers.google.com/protocol-buffers/) syntax, and there are many comments within the files to describe the function and intent of the various parts.
 
-Examples
---------
-
-TODO.
+For an introduction to the concepts behind OSMLR, please see the [documentation of the OSMLR software](https://github.com/opentraffic/osmlr/blob/master/docs/intro.md).
 
 License
 -------
