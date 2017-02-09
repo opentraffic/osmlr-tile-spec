@@ -10,6 +10,14 @@ The specification is written in [Google Protocol Buffers](https://developers.goo
 
 For an introduction to the concepts behind OSMLR, please see the [documentation of the OSMLR software](https://github.com/opentraffic/osmlr/blob/master/docs/intro.md).
 
+Sample Data
+-----------
+
+Sample OSMLR tiles are attached to each release of this spec:
+
+- [v1.0.0-rc.1 tiles for Manila, Philippines as PBF](https://github.com/opentraffic/osmlr-tile-spec/releases/download/v1.0.0-rc.1/osmlr_sample_pbf_manila.tar)
+- [v1.0.0-rc.1 tiles for Manila, Philippines as GeoJSON](https://github.com/opentraffic/osmlr-tile-spec/releases/download/v1.0.0-rc.1/osmlr_sample_geojson_manila.tar)
+
 License
 -------
 
