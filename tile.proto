@@ -35,4 +35,8 @@ message Tile {
 
   // a tile consists of a list of Entries.
   repeated Entry entries = 1;
+  
+  // optional reference to sequence ID of OSM data used to generate this tile.
+  // provides context on age and provenance of tile data derived from OSM
+  optional uint32 OsmSequenceId = 2;
 }
