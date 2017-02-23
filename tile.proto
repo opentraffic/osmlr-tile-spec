@@ -36,7 +36,9 @@ message Tile {
   // a tile consists of a list of Entries.
   repeated Entry entries = 1;
   
-  // optional reference to sequence ID of OSM data used to generate this tile.
-  // provides context on age and provenance of tile data derived from OSM
-  optional uint32 OsmSequenceId = 2;
+  // optional reference to timestamp of last update to OSM snapshot used to generate tile.
+  // This could refer to the timestamp referenced in the header of an OSM planet file or 
+  // the timestamp referenced in the state.txt file associated with a minutely update.
+  // This provides context on age and provenance of tile data derived from OSM.
+  optional uint64 OsmSnapshotTimestamp = 2;
 }
