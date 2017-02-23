@@ -108,10 +108,6 @@ message Segment {
     // if the length between successive LocationReferences is more than 15km
     // then you MUST insert an intermediate LocationReference.
     optional uint32 length = 6;
-
-    // optional hint to OSM Node ID if location reference corresponds directly with an existing OSM node
-    // assists in matching to OSM basemaps
-    optional uint64 OsmNodeHint = 7;
   }
 
   // a segment is a list of at least two LocationReferences.
@@ -124,9 +120,4 @@ message Segment {
   // a segment with only a single LocationReference is invalid and may be
   // ignored.
   repeated LocationReference lrps = 1;
-
-  // optional hint to OSM Way IDs if segment reference corresponds directly with an existing OSM ways
-  // assists in matching to OSM basemaps
-  // if segment reference spans multiple way IDs, list all referenced ways.
-  repeated uint64 OsmWayHint = 2;
 }
