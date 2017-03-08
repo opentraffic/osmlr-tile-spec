@@ -35,4 +35,12 @@ message Tile {
 
   // a tile consists of a list of Entries.
   repeated Entry entries = 1;
+
+  // Creation date and time (UTC epoch seconds) for this OSMLR tile.
+  optional uint32 creation_date = 2;
+
+  // Reference to the OSM changeset Id. While not an exact representation of
+  // the state of the OSM planet file that OSMLR was derived from, this
+  // provides context on age and provenance of tile data derived from OSM.
+  optional uint64 changeset_id = 3;
 }
