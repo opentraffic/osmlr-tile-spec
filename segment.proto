@@ -59,7 +59,7 @@ message Segment {
   // the road at a particular reference coordinate, or properties of the road
   // between the current LocationReference and the next.
   //
-  // the first and last LocationReference reference coordinates will be at
+  // the first and last LocationReference reference coordinates will usually be at
   // "true" intersections, which are intersections where there are multiple
   // paths through the intersection. This excludes "false" intersections where
   // two roads cross, but there are not multiple paths, such as overpasses,
@@ -74,6 +74,10 @@ message Segment {
   // numbered 1-5. locations 1 & 5 are at true intersections with other roads
   // and 2, 3 & 4 are intermediate LocationReferences inserted due to the length
   // of the road.
+  //
+  // Occasionally, a LocationReference can be inserted along a road (i.e., not at 
+  // a true intersection) to break long road segments into multiple OSMLR
+  // segments. 
   //
   message LocationReference {
     // the reference coordinate.
@@ -108,6 +112,10 @@ message Segment {
     // if the length between successive LocationReferences is more than 15km
     // then you MUST insert an intermediate LocationReference.
     optional uint32 length = 6;
+
+    // Is this LRP at a node/intersection (true) or along a road (false)?
+    // This hint can be useful wen associating OSMLR to routing graphs
+    optional bool at_node = 7;
   }
 
   // a segment is a list of at least two LocationReferences.
