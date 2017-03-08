@@ -36,7 +36,7 @@ message Tile {
   // a tile consists of a list of Entries.
   repeated Entry entries = 1;
 
-  // Creation date and time for this OSMLR tile
+  // Creation date and time (UTC epoch seconds) for this OSMLR tile.
   optional uint32 creation_date = 2;
 
   // Reference to the OSM changeset Id. While not an exact representation of
