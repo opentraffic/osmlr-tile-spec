@@ -43,4 +43,9 @@ message Tile {
   // the state of the OSM planet file that OSMLR was derived from, this
   // provides context on age and provenance of tile data derived from OSM.
   optional uint64 changeset_id = 3;
+  
+  // A string denoting the geographic extent of this tile, so as to be projection
+  // or really tiling system agnostic, its simple string which can be interpreted
+  // differently depending on the target tiling system
+  optional string geographic_extent = 4;
 }
