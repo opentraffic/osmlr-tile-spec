@@ -48,5 +48,5 @@ message Tile {
   // extents of the tile but has no strict format. So as to remain projection
   // or really tiling system agnostic, its simple string which can be interpreted
   // differently depending on the tiling system used to generate and consume the tile
-  optional string descriptor = 4;
+  optional string description = 4;
 }
