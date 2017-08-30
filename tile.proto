@@ -20,17 +20,24 @@ import "segment.proto";
 // this should not be a problem. in return, we get (mostly) compact IDs which
 // are (mostly) tolerant to data updates.
 //
-message Tile {
 
-  enum Marker {
-    MarkDeleted = 1;
-  }
+message MarkedDeleted {
+  optional uint32 segment_deleted_date = 1;
+
+  // TODO - possible add information about segments that replace the deleted
+  // segment
+}
+
+message Tile {
 
   message Entry {
     // an entry in the tile should be _either_ a Segment _or_ a Marker. a tile
     // containing an Entry with both or neither is invalid.
+    // Date is when the OSMLR segment was created (if segment exists) or the
+    // date when the segment was deleted (if marker exists)
     optional Segment segment = 1;
-    optional Marker marker = 2;
+    optional MarkedDeleted marker = 2;
+    optional uint32 segment_creation_date = 3;
   }
 
   // a tile consists of a list of Entries.
